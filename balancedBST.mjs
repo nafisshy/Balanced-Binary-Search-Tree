@@ -156,7 +156,30 @@ class Tree{
         this.insertNode(targetNode.right);
        } 
     }
+
+    height(node,lh=1,rh=1){
+        //base case
+        if(node===null){
+            return lh>rh?lh:rh;
+        }
+        let returnValue;
+        if (node.right !== null) {
+            rh++;
+            returnValue = this.height(node.right,lh,rh);
+        }
+        if (node.left !== null) {
+            lh++;
+            returnValue = this.height(node.right,lh,rh);
+        }
+        
+        return returnValue;
+    }
 }
 let tree = new Tree();
 let root =tree.buildTree([31,2,4,20,1,9,7,12,8,9,10,6]);
 tree.prettyPrint(root);
+tree.remove(1);
+tree.remove(6);
+let tempnode=tree.find(4);
+console.log(tree.height(root));
+console.log(tree.height(tempnode));
