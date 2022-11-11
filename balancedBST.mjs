@@ -69,7 +69,6 @@ class Tree{
 
     insertNode(node,root =this.root){
         let data=node.data;
-        console.log(root.data);
         if(root.data===data){
             return 'duplicate insertion';
         }
@@ -113,9 +112,51 @@ class Tree{
         }
         return returnValue;
     }
+
+    findParent(value, root = this.root){
+        let returnValue;
+        if(value===root.left.data){
+            return root;   
+        }
+        else if(value===root.right.data){
+            return root;   
+        }
+        else{
+        if(value<root.data){
+            if(root.left!==null){
+                returnValue=this.findParent(value,root.left);
+            }
+        }
+        else if(value>root.data){
+            if(root.right!==null){
+                returnValue=this.findParent(value,root.right);
+            }
+        }
+        else if(root.left==null && root.right==null){
+            return null;
+        }
+        return returnValue;
+        }
+        
+    }
+
+    remove(data){
+       const parentNode= this.findParent(data);
+       const targetNode = this.find(data);
+       if(parentNode.left.data===data){
+        parentNode.left=null;
+       }
+       else if(parentNode.right.data===data){
+        parentNode.right=null;
+       }
+       if(targetNode.left!==null){
+        this.insertNode(targetNode.left);
+       }
+       if(targetNode.right!==null){
+        this.insertNode(targetNode.right);
+       } 
+    }
 }
 let tree = new Tree();
 let root =tree.buildTree([31,2,4,20,1,9,7,12,8,9,10,6]);
-tree.prettyPrint(root);
-tree.insertNode(newroot);
 tree.prettyPrint(root);
