@@ -1,7 +1,7 @@
 import mergesort from "./mergesort.mjs";
 import removeDuplicate from "./removeDuplicate.mjs";
 
-export class Node{
+class Node{
     constructor(data=null){
         this.data=data;
         this.left=null;
